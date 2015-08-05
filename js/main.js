@@ -2,7 +2,8 @@ var unsortedNumbers = [234,132,12, 400, 242, 123];
 var sortedNumbers = [12,123,132,234,242,400];
 var letter = ["E", "L", "E", "V", "E", "N"];
 var scaleFactor = 1; // 1 means no scaling
-var incorrectAnswers = 0; 
+var incorrectAnswers = 0;
+var mute = true; 
 
 $(document).ready(function() 
 {	
@@ -10,6 +11,7 @@ $(document).ready(function()
     createDroppableElements();
     $('#happy').hide();
     $('#sad').hide();
+    $('#fireworks-video').hide();
     $('.bubble').show().append("Drag and drop the numbers to find out how many times Mickey Mouse and his friends slipped on the slide.");
     
     $(window).resize(function() {
@@ -19,11 +21,13 @@ $(document).ready(function()
         $(window).trigger('resize');
     }, 1000);
    
-    $('body').on('click', '.try-again', restart);
-    $('body').click(function () 
+    $('#restart').on('click', restart);
+    $('#game-content').click(function () 
     {
         $('.bubble').hide().empty();
     });
+
+    $('#sound').click(handleSound);
 });
 
 //used in all games for resizing and scaling their content
@@ -135,6 +139,7 @@ function handleDrop(event, ui)
         if (sortedNumbers[dropDivIndex] == number)
         {
             $('#droppable-number' + dropDivIndex).addClass('correct');
+            playCorrectSound();
             $('#droppable-number' + dropDivIndex).attr("draggable", 'false'); 
             $(this).append("<label>" + letter[dropDivIndex] + "<br>" + number + "</label>").addClass('swing');  
             i = sortedNumbers.length;
@@ -142,6 +147,7 @@ function handleDrop(event, ui)
         else
         {
         	$('#droppable-number' + dropDivIndex).addClass('incorrect');
+        	playWrongSound();
         	$(this).append("<label><br>" + number + "</label>").addClass('swing'); 
         	incorrectAnswers++;          
             i = sortedNumbers.length;
@@ -156,13 +162,14 @@ function showMessage()
 		{
 			$('#sad').show();
 			$('.bubble').show().empty()
-						.append("Try again!");
+						.append("<h3>Try again!</h3>");
 		}
 		else
 		{
 			$('#happy').show();
 			$('.bubble').show().empty()
-						.append("We slipped on the slide 11 times!");
+						.append("<h3>We slipped on the slide ELEVEN times!</h3>");
+			playVideo();
 		}
 
 	$('#game-content').click(function () 
@@ -170,6 +177,7 @@ function showMessage()
         $('.bubble').hide();
         $('#happy').hide();
         $('#sad').hide();
+        $('video').hide();
     });
 }
 
@@ -183,6 +191,42 @@ function restart()
 
     $('#happy').hide();
     $('#sad').hide();
+    $('#fireworks-video').trigger('pause').hide();
     incorrectAnswers = 0;
     
+}
+
+function playCorrectSound()
+{
+	$("#correct-choice-audio").trigger('play');
+	document.getElementById("correct-choice-audio").playbackRate = 3.5; 
+}
+
+function playWrongSound()
+{
+	$("#wrong-choice-audio").trigger('play');
+	document.getElementById("wrong-choice-audio").playbackRate = 2.0; 
+}
+
+function playVideo()
+{
+	$("#fireworks-video").show().trigger('play');
+}
+
+function handleSound()
+{
+	if(mute == true)
+	{
+		$('#sound').attr('src', '../img/sound-off-icon.png');
+		mute = false;
+		$('audio').prop('muted', !mute);
+		$('video').prop('muted', !mute);
+	}
+	else
+	{
+		$('#sound').attr('src', '../img/sound-on-icon.png');
+		mute = true;
+		$('audio').prop('muted', mute);
+		$('video').prop('muted', mute);
+	}
 }

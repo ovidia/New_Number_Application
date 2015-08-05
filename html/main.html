@@ -15,13 +15,30 @@
 					<div id = 'message'>
 						<div class = 'bubble'></div>
 						<img src = '../img/Minnie_Mouse.png' id = 'happy'>
-						<img src = '../img/mikey.gif' id = 'sad'>					
+						<img src = '../img/mikey.gif' id = 'sad'>
+					</div>
+					<div id = 'fireworks-div'>
+						<video id="fireworks-video" width="320" height="176" loop>
+  							<source src="../include/media/Fireworks.mp4" type="video/mp4">
+						</video>
 					</div>
 					<div id = 'options-bar-div'>
-						<div id = 'options-bar' class = 'try-again'></div>
+						<div id = 'options-bar' class = 'try-again'>
+							<img src = "../img/replay.png" id = 'restart' width = "50"><p></p>
+							<img src = "../img/sound-on-icon.png" id = 'sound' width = "45">
+						</div>
 					</div>
 					<div id = 'draggable-numbers-div'></div>
 					<div id = 'droppable-numbers-div'></div>
+
+					<audio id="wrong-choice-audio" preload="none"> 
+				   		<source src="../include/media/Ohnoo.mp3" type="audio/mpeg">
+					</audio>
+
+					<audio id="correct-choice-audio" preload="none">
+						<source src="../include/media/Hooray.mp3" type="audio/mpeg">
+					</audio>
+					
 				</div>
 			</div>
 		</div>	
@@ -30,6 +47,7 @@
  		<script src = "../include/jquery-migrate-1.2.1.min.js" ></script>
  		<script src = "../include/jquery-ui.min.js" ></script>
  		<script src = "../include/bootstrap.min.js" ></script>
-		<script type = "text/javascript" src = "../js/main.js" ></script>		
+		<script type = "text/javascript" src = "../js/main.js" ></script>	
+		<script type="text/javascript" src="../include/jquery.ui.touch-punch.min.js"></script>	
 	</body>
 </html>
