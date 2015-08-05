@@ -183,7 +183,6 @@ body
     height: 80px;
     cursor: pointer;	
 	margin-bottom:1px;	
-
 }
 
 #restart:hover, #sound-on:hover, #sound-off:hover
@@ -200,7 +199,6 @@ body
     left:100px;
     z-index:3;
 }
-
 
 .swing
 {

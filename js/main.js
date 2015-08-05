@@ -27,9 +27,9 @@ $(document).ready(function()
         $('.bubble').hide().empty();
     });
 
-    $('#sound').click(handleSound);
+    
 });
-
+$('#sound').click(handleSound);
 //used in all games for resizing and scaling their content
 //resizes the #wrapper-div width and height keeping the aspect ratio and scales the content of the #content-div
 function resize()
@@ -216,17 +216,19 @@ function playVideo()
 function handleSound()
 {
 	if(mute == true)
-	{
-		$('#sound').attr('src', '../img/sound-off-icon.png');
-		mute = false;
+	{	
+		mute = !mute;
+		$('#sound').attr('src', '../img/sound-off-icon.png');		
 		$('audio').prop('muted', !mute);
 		$('video').prop('muted', !mute);
+		
 	}
 	else
 	{
-		$('#sound').attr('src', '../img/sound-on-icon.png');
-		mute = true;
-		$('audio').prop('muted', mute);
-		$('video').prop('muted', mute);
+		mute = !mute;
+		$('#sound').attr('src', '../img/sound-on-icon.png');		
+		$('audio').prop('muted', !mute);
+		$('video').prop('muted', !mute);
+		
 	}
 }
